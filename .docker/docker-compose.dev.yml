@@ -1,0 +1,17 @@
+services:
+  bot:
+    build:
+      context: ../..
+      dockerfile: event-loop/.docker/Dockerfile
+      target: ${DOCKER_TARGET:-dev}
+    container_name: ${PROJECT_NAME}
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    env_file:
+      - .env
+    volumes:
+      - ../..:/workspace
