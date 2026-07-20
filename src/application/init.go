@@ -7,9 +7,9 @@ import (
 	"log"
 	"sync"
 
+	"github.com/ChatDetectiveORG/event-loop/src/application/leveltermination"
 	"github.com/ChatDetectiveORG/event-loop/src/infrastructure/config"
 	"github.com/ChatDetectiveORG/event-loop/src/infrastructure/referral"
-	levelmanagement "github.com/ChatDetectiveORG/shared/levelManagement"
 	"github.com/ChatDetectiveORG/shared/ratelimit"
 )
 
@@ -56,7 +56,7 @@ func startLevelTermination(ctx context.Context, cfg *config.Config, wg *sync.Wai
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		levelmanagement.StartLevelTerminationLoop(ctx, interval, cfg)
+		leveltermination.StartLevelTerminationLoop(ctx, interval, cfg)
 		<-ctx.Done()
 	}()
 }
