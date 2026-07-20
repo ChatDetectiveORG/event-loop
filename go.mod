@@ -4,13 +4,13 @@ go 1.23.3
 
 require (
 	github.com/ChatDetectiveORG/shared v0.1.30
+	github.com/go-pg/pg/v10 v10.15.0
 	github.com/gomodule/redigo v1.9.3
 	github.com/spf13/viper v1.21.0
 )
 
 require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/go-pg/pg/v10 v10.15.0 // indirect
 	github.com/go-pg/zerochecker v0.2.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -22,7 +22,6 @@ require (
 	github.com/spf13/afero v1.15.0 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
-	github.com/streadway/amqp v1.1.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
 	github.com/vmihailenco/bufpool v0.1.11 // indirect
@@ -37,4 +36,7 @@ require (
 	mellium.im/sasl v0.3.1 // indirect
 )
 
-replace gopkg.in/telebot.v4 => ../forks/telebot
+replace (
+	github.com/ChatDetectiveORG/shared => ../shared
+	gopkg.in/telebot.v4 => ../forks/telebot
+)
