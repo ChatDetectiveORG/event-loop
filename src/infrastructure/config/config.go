@@ -21,14 +21,14 @@ const DefaultReferralRewardManagerInterval = 12 * time.Hour
 const DefaultLevelTerminationInterval = 12 * time.Hour
 
 type Config struct {
-	RuntimeConfig *RuntimeConfig
-	RedisConfig   *RedisConfig
+	RuntimeConfig  *RuntimeConfig
+	RedisConfig    *RedisConfig
 	RabbitMQConfig *RabbitMQConfig
 }
 
 type RabbitMQConfig struct {
-	Host string
-	Port string
+	Host     string
+	Port     string
 	Username string
 	Password string
 }
@@ -38,11 +38,11 @@ func (cfg *RabbitMQConfig) URL() string {
 }
 
 type RuntimeConfig struct {
-	PodID           string
-	PodType         string
-	TokenBucketRate int
+	PodID                         string
+	PodType                       string
+	TokenBucketRate               int
 	ReferralRewardManagerInterval time.Duration
-	LevelTerminationInterval time.Duration
+	LevelTerminationInterval      time.Duration
 }
 
 type RedisConfig struct {
@@ -66,7 +66,7 @@ func FetchConfig() (*Config, *e.ErrorInfo) {
 	viper.SetDefault("TOKEN_BUCKET_RATE", DefaultTokenBucketRate)
 	viper.SetDefault("REFERRAL_REWARD_MANAGER_INTERVAL", DefaultReferralRewardManagerInterval)
 	viper.SetDefault("LEVEL_TERMINATION_INTERVAL", DefaultLevelTerminationInterval)
-	
+
 	cfg := &Config{
 		RedisConfig: &RedisConfig{
 			Host:              viper.GetString("REDIS_HOST"),
@@ -82,16 +82,17 @@ func FetchConfig() (*Config, *e.ErrorInfo) {
 			WriteTimeout:      viper.GetDuration("REDIS_WRITE_TIMEOUT"),
 		},
 		RabbitMQConfig: &RabbitMQConfig{
-			Host: viper.GetString("RABBITMQ_HOST"),
-			Port: viper.GetString("RABBITMQ_PORT"),
+			Host:     viper.GetString("RABBITMQ_HOST"),
+			Port:     viper.GetString("RABBITMQ_PORT"),
 			Username: viper.GetString("RABBITMQ_USERNAME"),
 			Password: viper.GetString("RABBITMQ_PASSWORD"),
 		},
 		RuntimeConfig: &RuntimeConfig{
-			PodID:           viper.GetString("POD_ID"),
-			PodType:         PodType,
-			TokenBucketRate: viper.GetInt("TOKEN_BUCKET_RATE"),
+			PodID:                         viper.GetString("POD_ID"),
+			PodType:                       PodType,
+			TokenBucketRate:               viper.GetInt("TOKEN_BUCKET_RATE"),
 			ReferralRewardManagerInterval: viper.GetDuration("REFERRAL_REWARD_MANAGER_INTERVAL"),
+			LevelTerminationInterval:      viper.GetDuration("LEVEL_TERMINATION_INTERVAL"),
 		},
 	}
 	return cfg, e.Nil()
