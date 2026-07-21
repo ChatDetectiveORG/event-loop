@@ -69,11 +69,11 @@ func InitPostgresql() *e.ErrorInfo {
 
 func CreateIndexes(db *pg.DB) error {
     // Индекс для поиска, где пользователь — первый в связке
-    _, err := db.Exec(`CREATE INDEX IF NOT EXISTS idx_relations_first_user ON user_relations (first_user_id)`)
+    _, err := db.Exec(`CREATE INDEX IF NOT EXISTS idx_relations_first_user ON user_relations (first_user_id_hash)`)
     if err != nil { return err }
 
     // Индекс для поиска, где пользователь — второй в связке
-    _, err = db.Exec(`CREATE INDEX IF NOT EXISTS idx_relations_second_user ON user_relations (second_user_id)`)
+    _, err = db.Exec(`CREATE INDEX IF NOT EXISTS idx_relations_second_user ON user_relations (second_user_id_hash)`)
     if err != nil { return err }
 
 	_, err = db.Exec(`CREATE INDEX IF NOT EXISTS idx_messages_sender_id_hash ON messages (sender_id_hash)`)
