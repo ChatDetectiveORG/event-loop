@@ -129,9 +129,14 @@ func task(db *pg.DB, taskCfg taskCfg) *e.ErrorInfo {
 	}
 	defer ch.Close()
 
+	openChannel := func() (*amqp.Channel, error) {
+		return conn.Channel()
+	}
+
 	pub, err := h.NewOutgoingPublisher(h.OutgoingConfig{
-		Channel: ch,
-		PodID:   taskCfg.Cfg.RuntimeConfig.PodID,
+		Channel:     ch,
+		OpenChannel: openChannel,
+		PodID:       taskCfg.Cfg.RuntimeConfig.PodID,
 	})
 	wg := sync.WaitGroup{}
 	ctx, cancel := context.WithCancel(context.Background())
